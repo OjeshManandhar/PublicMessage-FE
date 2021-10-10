@@ -6,10 +6,14 @@ import Web3 from 'web3';
 // components
 import Test from 'components/Test';
 
+// ABI
+// import PublicMessageABI from 'contract_abis/PublicMessages';
+
 function App() {
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(true);
   const [account, setAccount] = useState(null);
+  // const [publicMessage, setPublicMessage] = useState(null);
 
   useEffect(() => {
     async function init() {
@@ -38,9 +42,45 @@ function App() {
       setError(false);
       setLoading(false);
 
+      // Get account
       const accounts = await web3.eth.getAccounts();
       console.log('accounts:', accounts);
       setAccount(accounts[0]);
+
+      /*
+      // Load contract
+      const networkId = await web3.eth.net.getId();
+      
+      const PublicMessage = PublicMessageABI.networks[networkId];
+      if (PublicMessage) {
+        const pubMsg = new web3.eth.Contract(
+          PublicMessageABI.abi,
+          PublicMessage.address
+        );
+
+        console.log('pubMsg:', pubMsg);
+
+        console.log(
+          'handlePrice:',
+          await pubMsg.methods.getHandlePrice().call()
+        );
+
+        // await pubMsg.methods.setHandle('Bob').send({
+        //   from: accounts[0],
+        //   value: '1000000000000000'
+        // });
+
+        console.log('handle:', await pubMsg.methods.getHandle().call());
+
+        console.log(
+          'contract balance:',
+          web3.utils.fromWei(
+            await web3.eth.getBalance(PublicMessage.address),
+            'ether'
+          )
+        );
+      }
+      */
 
       return web3;
     }
