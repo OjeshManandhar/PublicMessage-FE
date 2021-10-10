@@ -5,6 +5,7 @@ import Web3 from 'web3';
 
 // components
 import Test from 'components/Test';
+import FullScreenCenter from 'components/FullScreenCenter';
 
 // ABI
 // import PublicMessageABI from 'contract_abis/PublicMessages';
@@ -89,9 +90,9 @@ function App() {
   }, []);
 
   return error ? (
-    <h1>Error</h1>
+    <FullScreenCenter>Error</FullScreenCenter>
   ) : loading ? (
-    <h1>Loading</h1>
+    <FullScreenCenter>Loading</FullScreenCenter>
   ) : (
     <Test str={account || ''} />
   );
