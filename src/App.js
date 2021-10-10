@@ -5,7 +5,7 @@ import Web3 from 'web3';
 
 // components
 // import Test from 'components/Test';
-import MessagesBox from 'components/MessagesBox';
+import MessagesArea from 'components/MessagesArea';
 import FullScreenCenter from 'components/FullScreenCenter';
 
 // ABI
@@ -97,7 +97,7 @@ function App() {
   ) : (
     <>
       {/* <Test str={account || ''} /> */}
-      <MessagesBox />
+      <MessagesArea />
     </>
   );
 }

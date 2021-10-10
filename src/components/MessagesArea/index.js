@@ -6,7 +6,7 @@ import Message from 'components/Message';
 // styles
 import * as S from './styles';
 
-function MessagesBox() {
+function MessagesArea() {
   const chatRef = useRef();
 
   const [message, setMessage] = useState('');
@@ -126,4 +126,4 @@ function MessagesBox() {
   );
 }
 
-export default MessagesBox;
+export default MessagesArea;
