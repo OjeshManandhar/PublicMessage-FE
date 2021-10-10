@@ -1,9 +1,14 @@
-import React, { useState, useCallback } from 'react';
+import React, { useRef, useState, useEffect, useCallback } from 'react';
+
+// components
+import Message from 'components/Message';
 
 // styles
 import * as S from './styles';
 
 function MessagesBox() {
+  const chatRef = useRef();
+
   const [message, setMessage] = useState('');
 
   const sendMsg = useCallback(() => {
@@ -14,11 +19,101 @@ function MessagesBox() {
     setMessage('');
   }, [message]);
 
+  useEffect(() => {
+    if (chatRef.current) {
+      chatRef.current.scrollIntoView({
+        behavior: 'smooth',
+        block: 'end',
+        inline: 'nearest'
+      });
+    }
+  });
+
   return (
     <S.Container>
       <S.Messages>
-        <li>Just a test</li>
-        <li>Just another test</li>
+        <S.MessageWrapper ref={chatRef}>
+          <Message message={{ from: 'Ojesh', msg: 'Test' }} />
+          <Message message={{ from: 'Ojesh', msg: 'Test' }} />
+          <Message
+            message={{
+              from: 'DeadSkull',
+              msg: 'hadg;asdb;sakdbsa;kjdb sa;d jbsa;dbas;dvas;dvashdjlbas;djbsa;dkjbas;djkbas;djasb;ndkjasbdlkasjbdsaijkdba;skjdbas;kdjbas;djkba;sdasbldijaksbdkasjbd;askjdbasdbaslkdjbasldikajsbd;akjdb;asiudjb;sajkdba;kdajbd.sajdb;asidkjb'
+            }}
+          />
+
+          <Message message={{ from: 'Ojesh', msg: 'Test' }} />
+          <Message message={{ from: 'Ojesh', msg: 'Test' }} />
+          <Message
+            message={{
+              from: 'DeadSkull',
+              msg: 'hadg;asdb;sakdbsa;kjdb sa;d jbsa;dbas;dvas;dvashdjlbas;djbsa;dkjbas;djkbas;djasb;ndkjasbdlkasjbdsaijkdba;skjdbas;kdjbas;djkba;sdasbldijaksbdkasjbd;askjdbasdbaslkdjbasldikajsbd;akjdb;asiudjb;sajkdba;kdajbd.sajdb;asidkjb'
+            }}
+          />
+
+          <Message message={{ from: 'Ojesh', msg: 'Test' }} />
+          <Message message={{ from: 'Ojesh', msg: 'Test' }} />
+          <Message
+            message={{
+              from: 'DeadSkull',
+              msg: 'hadg;asdb;sakdbsa;kjdb sa;d jbsa;dbas;dvas;dvashdjlbas;djbsa;dkjbas;djkbas;djasb;ndkjasbdlkasjbdsaijkdba;skjdbas;kdjbas;djkba;sdasbldijaksbdkasjbd;askjdbasdbaslkdjbasldikajsbd;akjdb;asiudjb;sajkdba;kdajbd.sajdb;asidkjb'
+            }}
+          />
+
+          <Message message={{ from: 'Ojesh', msg: 'Test' }} />
+          <Message message={{ from: 'Ojesh', msg: 'Test' }} />
+          <Message
+            message={{
+              from: 'DeadSkull',
+              msg: 'hadg;asdb;sakdbsa;kjdb sa;d jbsa;dbas;dvas;dvashdjlbas;djbsa;dkjbas;djkbas;djasb;ndkjasbdlkasjbdsaijkdba;skjdbas;kdjbas;djkba;sdasbldijaksbdkasjbd;askjdbasdbaslkdjbasldikajsbd;akjdb;asiudjb;sajkdba;kdajbd.sajdb;asidkjb'
+            }}
+          />
+
+          <Message message={{ from: 'Ojesh', msg: 'Test' }} />
+          <Message message={{ from: 'Ojesh', msg: 'Test' }} />
+          <Message
+            message={{
+              from: 'DeadSkull',
+              msg: 'hadg;asdb;sakdbsa;kjdb sa;d jbsa;dbas;dvas;dvashdjlbas;djbsa;dkjbas;djkbas;djasb;ndkjasbdlkasjbdsaijkdba;skjdbas;kdjbas;djkba;sdasbldijaksbdkasjbd;askjdbasdbaslkdjbasldikajsbd;akjdb;asiudjb;sajkdba;kdajbd.sajdb;asidkjb'
+            }}
+          />
+
+          <Message message={{ from: 'Ojesh', msg: 'Test' }} />
+          <Message message={{ from: 'Ojesh', msg: 'Test' }} />
+          <Message
+            message={{
+              from: 'DeadSkull',
+              msg: 'hadg;asdb;sakdbsa;kjdb sa;d jbsa;dbas;dvas;dvashdjlbas;djbsa;dkjbas;djkbas;djasb;ndkjasbdlkasjbdsaijkdba;skjdbas;kdjbas;djkba;sdasbldijaksbdkasjbd;askjdbasdbaslkdjbasldikajsbd;akjdb;asiudjb;sajkdba;kdajbd.sajdb;asidkjb'
+            }}
+          />
+
+          <Message message={{ from: 'Ojesh', msg: 'Test' }} />
+          <Message message={{ from: 'Ojesh', msg: 'Test' }} />
+          <Message
+            message={{
+              from: 'DeadSkull',
+              msg: 'hadg;asdb;sakdbsa;kjdb sa;d jbsa;dbas;dvas;dvashdjlbas;djbsa;dkjbas;djkbas;djasb;ndkjasbdlkasjbdsaijkdba;skjdbas;kdjbas;djkba;sdasbldijaksbdkasjbd;askjdbasdbaslkdjbasldikajsbd;akjdb;asiudjb;sajkdba;kdajbd.sajdb;asidkjb'
+            }}
+          />
+
+          <Message message={{ from: 'Ojesh', msg: 'Test' }} />
+          <Message message={{ from: 'Ojesh', msg: 'Test' }} />
+          <Message
+            message={{
+              from: 'DeadSkull',
+              msg: 'hadg;asdb;sakdbsa;kjdb sa;d jbsa;dbas;dvas;dvashdjlbas;djbsa;dkjbas;djkbas;djasb;ndkjasbdlkasjbdsaijkdba;skjdbas;kdjbas;djkba;sdasbldijaksbdkasjbd;askjdbasdbaslkdjbasldikajsbd;akjdb;asiudjb;sajkdba;kdajbd.sajdb;asidkjb'
+            }}
+          />
+
+          <Message message={{ from: 'Ojesh', msg: 'Test' }} />
+          <Message message={{ from: 'Ojesh', msg: 'Test' }} />
+          <Message
+            message={{
+              from: 'DeadSkull',
+              msg: 'hadg;asdb;sakdbsa;kjdb sa;d jbsa;dbas;dvas;dvashdjlbas;djbsa;dkjbas;djkbas;djasb;ndkjasbdlkasjbdsaijkdba;skjdbas;kdjbas;djkba;sdasbldijaksbdkasjbd;askjdbasdbaslkdjbasldikajsbd;akjdb;asiudjb;sajkdba;kdajbd.sajdb;asidkjb'
+            }}
+          />
+        </S.MessageWrapper>
       </S.Messages>
 
       <S.Toast>ASD is sending a message</S.Toast>

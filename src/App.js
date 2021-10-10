@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import Web3 from 'web3';
 
 // components
-import Test from 'components/Test';
+// import Test from 'components/Test';
 import MessagesBox from 'components/MessagesBox';
 import FullScreenCenter from 'components/FullScreenCenter';
 
@@ -14,7 +14,7 @@ import FullScreenCenter from 'components/FullScreenCenter';
 function App() {
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(true);
-  const [account, setAccount] = useState(null);
+  const [, setAccount] = useState(null);
   // const [publicMessage, setPublicMessage] = useState(null);
 
   useEffect(() => {
@@ -96,7 +96,7 @@ function App() {
     <FullScreenCenter>Loading</FullScreenCenter>
   ) : (
     <>
-      <Test str={account || ''} />
+      {/* <Test str={account || ''} /> */}
       <MessagesBox />
     </>
   );

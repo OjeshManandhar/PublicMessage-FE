@@ -11,27 +11,27 @@ export const Container = styled.div`
   align-items: stretch;
 `;
 
-export const Messages = styled.ul`
+export const Messages = styled.div`
+  flex: 1;
+
+  padding: 1rem;
+
+  overflow: auto;
+`;
+
+export const MessageWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   align-items: flex-start;
 
   flex-grow: 1;
-
-  padding: 2rem 5rem;
-
-  & * {
-    max-width: 80%;
-  }
-
-  border: 5px solid black;
 `;
 
 export const Toast = styled.div`
   padding: 1rem;
 
-  font-size: 1.2rem;
+  font-size: 1rem;
   font-style: italic;
 
   color: grey;
