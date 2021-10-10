@@ -16,7 +16,6 @@ function App() {
       let web3;
 
       // Select provider
-
       if (window.ethereum) {
         console.log('Using ethereum');
 
