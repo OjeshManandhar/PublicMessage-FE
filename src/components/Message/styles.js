@@ -18,6 +18,11 @@ export const Container = styled.li`
 
 export const Content = styled.div`
   text-align: inherit;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: ${props => (props.own ? 'flex-end' : 'flex-start')};
 `;
 
 export const Msg = styled.p`

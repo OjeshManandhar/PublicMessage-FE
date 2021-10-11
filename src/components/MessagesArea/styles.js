@@ -12,6 +12,8 @@ export const Container = styled.div`
 `;
 
 export const Messages = styled.div`
+  display: flex;
+
   flex: 1;
 
   padding: 1rem;
@@ -54,8 +56,6 @@ export const Toast = styled.div`
   }}
 
   transition: all 0.3s ease;
-
-  box-sizing: content-box;
 `;
 
 export const InputArea = styled.div`

@@ -91,8 +91,6 @@ function MessagesArea() {
     <S.Container>
       <S.Messages>
         <S.MessageWrapper ref={chatRef}>
-          {noMoreMsg && <h1>No More Messages</h1>}
-
           {chat.map((msg, index) => (
             <Message key={index} message={msg} />
           ))}

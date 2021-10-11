@@ -7,6 +7,7 @@ import publicMessage from './PublicMessages';
 class Web3js {
   constructor() {
     this.web3 = null;
+    this.account = null;
     this.networkId = null;
     this.accountChangedHandler = () => {};
   }
@@ -39,6 +40,8 @@ class Web3js {
       throw new Error('No account found.');
     }
 
+    this.account = acc;
+
     // Init contracts
     publicMessage.init(this.web3, this.networkId, acc);
 
@@ -47,6 +50,8 @@ class Web3js {
 
   async getAccount() {
     const accounts = await this.web3.eth.getAccounts();
+
+    this.account = accounts[0];
 
     return accounts[0];
   }

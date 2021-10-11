@@ -1,15 +1,20 @@
 import React from 'react';
 
+// utils
+import web3js from 'utils/Web3js';
+
 // styles
 import * as S from './styles';
 
 function Message({ message: { from, msg } }) {
+  const own = from === web3js.account;
+
   return (
-    <S.Container own={from === 'Ojesh'}>
-      <S.Content>
+    <S.Container own={own}>
+      <S.Content own={own}>
         <S.Msg>{msg}</S.Msg>
 
-        <S.From own={from === 'Ojesh'}>{from}</S.From>
+        <S.From own={own}>{from}</S.From>
       </S.Content>
     </S.Container>
   );
