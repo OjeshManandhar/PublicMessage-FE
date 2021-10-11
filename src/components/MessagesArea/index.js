@@ -9,6 +9,9 @@ import * as S from './styles';
 function MessagesArea() {
   const chatRef = useRef();
 
+  const toastTimeout = useRef();
+
+  const [toast, setToast] = useState('');
   const [message, setMessage] = useState('');
 
   const sendMsg = useCallback(() => {
@@ -28,6 +31,21 @@ function MessagesArea() {
       });
     }
   });
+
+  useEffect(() => {
+    if (toast) {
+      if (toastTimeout.current) {
+        clearTimeout(toastTimeout.current);
+      }
+
+      toastTimeout.current = setTimeout(() => setToast(''), 3000);
+    }
+  }, [toast]);
+
+  useEffect(() => {
+    setTimeout(() => setToast('ASD is sending a message'), 1000);
+    setTimeout(() => setToast('ASD is sending another message'), 2000);
+  }, []);
 
   return (
     <S.Container>
@@ -116,7 +134,7 @@ function MessagesArea() {
         </S.MessageWrapper>
       </S.Messages>
 
-      <S.Toast>ASD is sending a message</S.Toast>
+      <S.Toast show={Boolean(toast)}>{toast}</S.Toast>
 
       <S.InputArea>
         <S.Input value={message} onChange={e => setMessage(e.target.value)} />

@@ -19,7 +19,9 @@ export const Messages = styled.div`
   overflow: auto;
 `;
 
-export const MessageWrapper = styled.div`
+export const MessageWrapper = styled.ul`
+  list-style: none;
+
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -29,13 +31,31 @@ export const MessageWrapper = styled.div`
 `;
 
 export const Toast = styled.div`
-  padding: 1rem;
-
   font-size: 1rem;
   font-style: italic;
 
   color: grey;
   background: pink;
+
+  ${props => {
+    if (props.show) {
+      return `
+        height: auto;
+        padding: 1rem;
+
+        opacity: 1;
+      `;
+    }
+
+    return `
+      height: 0;
+      opacity: 0;
+    `;
+  }}
+
+  transition: all 0.3s ease;
+
+  box-sizing: content-box;
 `;
 
 export const InputArea = styled.div`

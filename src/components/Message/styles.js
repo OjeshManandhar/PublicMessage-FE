@@ -1,7 +1,7 @@
 // packages
 import styled from 'styled-components';
 
-export const Container = styled.div`
+export const Container = styled.li`
   align-self: ${props => (props.own ? 'flex-end' : 'flex-start')};
 
   width: auto;
