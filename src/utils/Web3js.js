@@ -40,7 +40,7 @@ class Web3js {
     }
 
     // Init contracts
-    publicMessage.init();
+    publicMessage.init(this.web3, this.networkId, acc);
 
     return acc;
   }

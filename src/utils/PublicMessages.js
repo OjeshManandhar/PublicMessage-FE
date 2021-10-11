@@ -7,20 +7,25 @@ class PublicMessages {
     this.contract = null;
   }
 
-  init(web3, networkId) {
+  init(web3, networkId, account) {
+    console.log('init');
+
     this.web3 = web3;
 
     const PublicMessage = PublicMessageABI.networks[networkId];
     if (PublicMessage) {
       this.contract = new web3.eth.Contract(
         PublicMessageABI.abi,
-        PublicMessage.address
+        PublicMessage.address,
+        { from: account }
       );
     }
   }
 
   isInit() {
     if (!this.web3 || !this.contract) {
+      console.log('isInit', this.web3, this.contract);
+
       throw new Error('Contract has not be loaded.');
     }
   }

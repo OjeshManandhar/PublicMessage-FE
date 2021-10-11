@@ -3,25 +3,65 @@ import React, { useRef, useState, useEffect, useCallback } from 'react';
 // components
 import Message from 'components/Message';
 
+// utils
+import publicMessage from 'utils/PublicMessages';
+
 // styles
 import * as S from './styles';
+
+const COUNT = 5;
 
 function MessagesArea() {
   const chatRef = useRef();
 
   const toastTimeout = useRef();
 
+  const [, setPage] = useState(1);
   const [toast, setToast] = useState('');
   const [message, setMessage] = useState('');
+  const [noMoreMsg, setNoMoreMsg] = useState(false);
+
+  const [chat, setChat] = useState([]);
 
   const sendMsg = useCallback(() => {
     const msg = message;
 
     console.log('message to send:', msg);
 
+    publicMessage.sendMessage(message);
+
     setMessage('');
   }, [message]);
 
+  const fetchMessages = useCallback(
+    async (page = 1) => {
+      if (noMoreMsg) return;
+
+      const _msgs = await publicMessage.getMessages(page, COUNT);
+
+      const msgs = _msgs.map(m => ({
+        from: m[0],
+        msg: m[1]
+      }));
+
+      console.log('msgs:', msgs);
+
+      if (msgs.length < COUNT) {
+        setNoMoreMsg(true);
+      }
+
+      setChat(old => {
+        const newChat = [...msgs, ...old];
+
+        return newChat;
+      });
+
+      setPage(old => old + 1);
+    },
+    [noMoreMsg]
+  );
+
+  // For scrolling to bottom of chat
   useEffect(() => {
     if (chatRef.current) {
       chatRef.current.scrollIntoView({
@@ -30,7 +70,12 @@ function MessagesArea() {
         inline: 'nearest'
       });
     }
-  });
+  }, []);
+
+  // Initial fetch
+  useEffect(() => {
+    fetchMessages();
+  }, [fetchMessages]);
 
   useEffect(() => {
     if (toast) {
@@ -42,95 +87,15 @@ function MessagesArea() {
     }
   }, [toast]);
 
-  useEffect(() => {
-    setTimeout(() => setToast('ASD is sending a message'), 1000);
-    setTimeout(() => setToast('ASD is sending another message'), 2000);
-  }, []);
-
   return (
     <S.Container>
       <S.Messages>
         <S.MessageWrapper ref={chatRef}>
-          <Message message={{ from: 'Ojesh', msg: 'Test' }} />
-          <Message message={{ from: 'Ojesh', msg: 'Test' }} />
-          <Message
-            message={{
-              from: 'DeadSkull',
-              msg: 'hadg;asdb;sakdbsa;kjdb sa;d jbsa;dbas;dvas;dvashdjlbas;djbsa;dkjbas;djkbas;djasb;ndkjasbdlkasjbdsaijkdba;skjdbas;kdjbas;djkba;sdasbldijaksbdkasjbd;askjdbasdbaslkdjbasldikajsbd;akjdb;asiudjb;sajkdba;kdajbd.sajdb;asidkjb'
-            }}
-          />
+          {noMoreMsg && <h1>No More Messages</h1>}
 
-          <Message message={{ from: 'Ojesh', msg: 'Test' }} />
-          <Message message={{ from: 'Ojesh', msg: 'Test' }} />
-          <Message
-            message={{
-              from: 'DeadSkull',
-              msg: 'hadg;asdb;sakdbsa;kjdb sa;d jbsa;dbas;dvas;dvashdjlbas;djbsa;dkjbas;djkbas;djasb;ndkjasbdlkasjbdsaijkdba;skjdbas;kdjbas;djkba;sdasbldijaksbdkasjbd;askjdbasdbaslkdjbasldikajsbd;akjdb;asiudjb;sajkdba;kdajbd.sajdb;asidkjb'
-            }}
-          />
-
-          <Message message={{ from: 'Ojesh', msg: 'Test' }} />
-          <Message message={{ from: 'Ojesh', msg: 'Test' }} />
-          <Message
-            message={{
-              from: 'DeadSkull',
-              msg: 'hadg;asdb;sakdbsa;kjdb sa;d jbsa;dbas;dvas;dvashdjlbas;djbsa;dkjbas;djkbas;djasb;ndkjasbdlkasjbdsaijkdba;skjdbas;kdjbas;djkba;sdasbldijaksbdkasjbd;askjdbasdbaslkdjbasldikajsbd;akjdb;asiudjb;sajkdba;kdajbd.sajdb;asidkjb'
-            }}
-          />
-
-          <Message message={{ from: 'Ojesh', msg: 'Test' }} />
-          <Message message={{ from: 'Ojesh', msg: 'Test' }} />
-          <Message
-            message={{
-              from: 'DeadSkull',
-              msg: 'hadg;asdb;sakdbsa;kjdb sa;d jbsa;dbas;dvas;dvashdjlbas;djbsa;dkjbas;djkbas;djasb;ndkjasbdlkasjbdsaijkdba;skjdbas;kdjbas;djkba;sdasbldijaksbdkasjbd;askjdbasdbaslkdjbasldikajsbd;akjdb;asiudjb;sajkdba;kdajbd.sajdb;asidkjb'
-            }}
-          />
-
-          <Message message={{ from: 'Ojesh', msg: 'Test' }} />
-          <Message message={{ from: 'Ojesh', msg: 'Test' }} />
-          <Message
-            message={{
-              from: 'DeadSkull',
-              msg: 'hadg;asdb;sakdbsa;kjdb sa;d jbsa;dbas;dvas;dvashdjlbas;djbsa;dkjbas;djkbas;djasb;ndkjasbdlkasjbdsaijkdba;skjdbas;kdjbas;djkba;sdasbldijaksbdkasjbd;askjdbasdbaslkdjbasldikajsbd;akjdb;asiudjb;sajkdba;kdajbd.sajdb;asidkjb'
-            }}
-          />
-
-          <Message message={{ from: 'Ojesh', msg: 'Test' }} />
-          <Message message={{ from: 'Ojesh', msg: 'Test' }} />
-          <Message
-            message={{
-              from: 'DeadSkull',
-              msg: 'hadg;asdb;sakdbsa;kjdb sa;d jbsa;dbas;dvas;dvashdjlbas;djbsa;dkjbas;djkbas;djasb;ndkjasbdlkasjbdsaijkdba;skjdbas;kdjbas;djkba;sdasbldijaksbdkasjbd;askjdbasdbaslkdjbasldikajsbd;akjdb;asiudjb;sajkdba;kdajbd.sajdb;asidkjb'
-            }}
-          />
-
-          <Message message={{ from: 'Ojesh', msg: 'Test' }} />
-          <Message message={{ from: 'Ojesh', msg: 'Test' }} />
-          <Message
-            message={{
-              from: 'DeadSkull',
-              msg: 'hadg;asdb;sakdbsa;kjdb sa;d jbsa;dbas;dvas;dvashdjlbas;djbsa;dkjbas;djkbas;djasb;ndkjasbdlkasjbdsaijkdba;skjdbas;kdjbas;djkba;sdasbldijaksbdkasjbd;askjdbasdbaslkdjbasldikajsbd;akjdb;asiudjb;sajkdba;kdajbd.sajdb;asidkjb'
-            }}
-          />
-
-          <Message message={{ from: 'Ojesh', msg: 'Test' }} />
-          <Message message={{ from: 'Ojesh', msg: 'Test' }} />
-          <Message
-            message={{
-              from: 'DeadSkull',
-              msg: 'hadg;asdb;sakdbsa;kjdb sa;d jbsa;dbas;dvas;dvashdjlbas;djbsa;dkjbas;djkbas;djasb;ndkjasbdlkasjbdsaijkdba;skjdbas;kdjbas;djkba;sdasbldijaksbdkasjbd;askjdbasdbaslkdjbasldikajsbd;akjdb;asiudjb;sajkdba;kdajbd.sajdb;asidkjb'
-            }}
-          />
-
-          <Message message={{ from: 'Ojesh', msg: 'Test' }} />
-          <Message message={{ from: 'Ojesh', msg: 'Test' }} />
-          <Message
-            message={{
-              from: 'DeadSkull',
-              msg: 'hadg;asdb;sakdbsa;kjdb sa;d jbsa;dbas;dvas;dvashdjlbas;djbsa;dkjbas;djkbas;djasb;ndkjasbdlkasjbdsaijkdba;skjdbas;kdjbas;djkba;sdasbldijaksbdkasjbd;askjdbasdbaslkdjbasldikajsbd;akjdb;asiudjb;sajkdba;kdajbd.sajdb;asidkjb'
-            }}
-          />
+          {chat.map((msg, index) => (
+            <Message key={index} message={msg} />
+          ))}
         </S.MessageWrapper>
       </S.Messages>
 
