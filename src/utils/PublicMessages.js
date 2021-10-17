@@ -50,6 +50,12 @@ class PublicMessages {
     return await this.contract.methods.getHandle().call();
   }
 
+  async handles(address) {
+    this.isInit();
+
+    return await this.contract.methods.handles(address).call();
+  }
+
   async sendMessage(message) {
     this.isInit();
 
