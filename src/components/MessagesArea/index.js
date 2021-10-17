@@ -11,7 +11,7 @@ import * as S from './styles';
 
 const COUNT = 5;
 
-function MessagesArea() {
+function MessagesArea({ account }) {
   const chatRef = useRef();
 
   const toastTimeout = useRef();
@@ -92,7 +92,7 @@ function MessagesArea() {
       <S.Messages>
         <S.MessageWrapper ref={chatRef}>
           {chat.map((msg, index) => (
-            <Message key={index} message={msg} />
+            <Message key={index} message={msg} account={account} />
           ))}
         </S.MessageWrapper>
       </S.Messages>

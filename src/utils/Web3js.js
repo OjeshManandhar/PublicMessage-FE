@@ -27,6 +27,7 @@ class Web3js {
       });
     } else if (Web3.givenProvider) {
       console.log('Using web3');
+
       web3 = new Web3(Web3.givenProvider || 'ws://localhost:8545');
     } else {
       throw new Error('No provider found. Install MetaMask.');

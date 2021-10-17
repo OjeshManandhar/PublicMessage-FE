@@ -1,16 +1,15 @@
 import React, { useState, useEffect } from 'react';
 
 // utils
-import web3js from 'utils/Web3js';
 import handles from 'utils/Handles';
 
 // styles
 import * as S from './styles';
 
-function Message({ message: { from, msg } }) {
+function Message({ account, message: { from, msg } }) {
   const [handle, setHandle] = useState(from);
 
-  const own = from === web3js.account;
+  const own = from === account;
 
   useEffect(() => {
     handles.getHandle(from).then(handle => setHandle(handle));
