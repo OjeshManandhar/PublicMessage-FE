@@ -40,8 +40,6 @@ function MessagesArea({ account }) {
         msg: m[1]
       }));
 
-      console.log('msgs:', msgs);
-
       if (msgs.length < COUNT) {
         setNoMoreMsg(true);
       }
@@ -54,6 +52,12 @@ function MessagesArea({ account }) {
     },
     [noMoreMsg]
   );
+
+  const getNextPage = useCallback(() => {
+    const page = Math.floor(chat.length / COUNT) + 1;
+
+    fetchMessages(page);
+  }, [chat, fetchMessages]);
 
   const handleNewMessage = useCallback(event => {
     const { _from, _msg } = event.returnValues;
@@ -116,6 +120,10 @@ function MessagesArea({ account }) {
     <S.Container>
       <S.Messages>
         <S.MessageWrapper ref={chatRef}>
+          {!noMoreMsg && (
+            <S.LoadMore onClick={() => getNextPage()}>Load More</S.LoadMore>
+          )}
+
           {chat.map((msg, index) => (
             <Message key={index} message={msg} account={account} />
           ))}

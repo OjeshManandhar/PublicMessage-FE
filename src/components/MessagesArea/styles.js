@@ -13,6 +13,7 @@ export const Container = styled.div`
 
 export const Messages = styled.div`
   display: flex;
+  flex-direction: column;
 
   flex: 1;
 
@@ -30,6 +31,18 @@ export const MessageWrapper = styled.ul`
   align-items: flex-start;
 
   flex-grow: 1;
+`;
+
+export const LoadMore = styled.li`
+  align-self: center;
+
+  margin-bottom: 1rem;
+  padding: 0.1rem 0.5rem;
+
+  border-radius: 0.5rem;
+  border: 0.1rem solid red;
+
+  cursor: pointer;
 `;
 
 export const Toast = styled.div`
