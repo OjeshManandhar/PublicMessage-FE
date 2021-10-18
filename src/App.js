@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 
 // components
-import MessagesArea from 'components/MessagesArea';
+import Home from 'components/Home';
 import FullScreenCenter from 'components/FullScreenCenter';
 
 // utils
@@ -17,7 +17,7 @@ function App() {
   }, []);
 
   useEffect(() => {
-    async function dummy() {
+    async function init() {
       try {
         const account = await web3js.init();
 
@@ -31,7 +31,7 @@ function App() {
       }
     }
 
-    dummy();
+    init();
   }, [handleAccountChange]);
 
   return error ? (
@@ -39,7 +39,7 @@ function App() {
   ) : loading ? (
     <FullScreenCenter>Loading</FullScreenCenter>
   ) : (
-    <MessagesArea account={account} />
+    <Home account={account} />
   );
 }
 

@@ -9,8 +9,6 @@ class PublicMessages {
   }
 
   init(web3, networkId, account) {
-    console.log('init');
-
     this.web3 = web3;
 
     const PublicMessage = PublicMessageABI.networks[networkId];
