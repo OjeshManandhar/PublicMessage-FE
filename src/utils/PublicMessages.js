@@ -5,6 +5,7 @@ class PublicMessages {
   constructor() {
     this.web3 = null;
     this.contract = null;
+    this.eventListeners = [];
   }
 
   init(web3, networkId, account) {
@@ -19,6 +20,22 @@ class PublicMessages {
         PublicMessage.address,
         { from: account }
       );
+
+      this.contract.events.MessageSaved().on('data', e => {
+        this.eventListeners.forEach(el => {
+          if (el.event === 'MessageSaved') {
+            el.callback(e);
+          }
+        });
+      });
+
+      this.contract.events.SendingMessage().on('data', e => {
+        this.eventListeners.forEach(el => {
+          if (el.event === 'SendingMessage') {
+            el.callback(e);
+          }
+        });
+      });
     }
   }
 
@@ -66,6 +83,31 @@ class PublicMessages {
     this.isInit();
 
     return await this.contract.methods.getMessages(page, count).call();
+  }
+
+  addEventListener(event, callback) {
+    this.isInit();
+
+    if (event !== 'MessageSaved' && event !== 'SendingMessage') {
+      throw new Error('Wrong event');
+    }
+
+    this.eventListeners.push({
+      event,
+      callback
+    });
+  }
+
+  removeEventListener(event, callback) {
+    this.isInit();
+
+    if (event !== 'MessageSaved' && event !== 'SendingMessage') {
+      throw new Error('Wrong event');
+    }
+
+    this.eventListeners.filter(
+      e => !(e.event === event && e.callback === callback)
+    );
   }
 }
 

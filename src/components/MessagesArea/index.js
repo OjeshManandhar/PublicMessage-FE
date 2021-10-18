@@ -16,18 +16,12 @@ function MessagesArea({ account }) {
 
   const toastTimeout = useRef();
 
-  const [, setPage] = useState(1);
+  const [chat, setChat] = useState([]);
   const [toast, setToast] = useState('');
   const [message, setMessage] = useState('');
   const [noMoreMsg, setNoMoreMsg] = useState(false);
 
-  const [chat, setChat] = useState([]);
-
   const sendMsg = useCallback(() => {
-    const msg = message;
-
-    console.log('message to send:', msg);
-
     publicMessage.sendMessage(message);
 
     setMessage('');
@@ -36,6 +30,8 @@ function MessagesArea({ account }) {
   const fetchMessages = useCallback(
     async (page = 1) => {
       if (noMoreMsg) return;
+
+      // const page = Math.floor(chat.length / COUNT) + 1;
 
       const _msgs = await publicMessage.getMessages(page, COUNT);
 
@@ -55,11 +51,32 @@ function MessagesArea({ account }) {
 
         return newChat;
       });
-
-      setPage(old => old + 1);
     },
     [noMoreMsg]
   );
+
+  const handleNewMessage = useCallback(event => {
+    const { _from, _msg } = event.returnValues;
+
+    setChat(old => {
+      const newMsg = {
+        from: _from,
+        msg: _msg
+      };
+
+      const newChat = [...old, newMsg];
+
+      return newChat;
+    });
+  }, []);
+
+  const handleMsgToast = useCallback(event => {
+    console.log(
+      'handleMsgToast:',
+      new Date().toISOString(),
+      event.returnValues
+    );
+  }, []);
 
   // For scrolling to bottom of chat
   useEffect(() => {
@@ -72,10 +89,18 @@ function MessagesArea({ account }) {
     }
   }, []);
 
-  // Initial fetch
+  // init
   useEffect(() => {
     fetchMessages();
-  }, [fetchMessages]);
+
+    publicMessage.addEventListener('MessageSaved', handleNewMessage);
+    publicMessage.addEventListener('SendingMessage', handleMsgToast);
+
+    return () => {
+      publicMessage.removeEventListener('MessageSaved', handleNewMessage);
+      publicMessage.removeEventListener('SendingMessage', handleMsgToast);
+    };
+  }, [fetchMessages, handleMsgToast, handleNewMessage]);
 
   useEffect(() => {
     if (toast) {
