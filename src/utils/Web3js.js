@@ -60,6 +60,10 @@ class Web3js {
   setAccountChangeHandler(cb) {
     this.accountChangedHandler = cb;
   }
+
+  toWei(ether) {
+    return this.web3.utils.toWei(ether, 'ether');
+  }
 }
 
 export default new Web3js();

@@ -12,11 +12,15 @@ import publicMessages from 'utils/PublicMessages';
 import { HomeStack } from 'global/enum';
 
 function Home({ account }) {
+  const [handlePrice, setHandlePrice] = useState(null);
   const [stack, setStack] = useState(HomeStack.LOADING);
 
   useEffect(() => {
     async function checkForHandle() {
       const handle = await publicMessages.getHandle();
+      const price = await publicMessages.getHandlePrice();
+
+      setHandlePrice(price);
 
       handle === '' ? setStack(HomeStack.CREATE) : setStack(HomeStack.MESSAGE);
     }
@@ -27,9 +31,21 @@ function Home({ account }) {
   if (stack === HomeStack.LOADING) {
     return <FullScreenCenter>Loading Home</FullScreenCenter>;
   } else if (stack === HomeStack.CREATE) {
-    return <SetHandle account={account} create={true} />;
+    return (
+      <SetHandle
+        create={true}
+        handlePrice={handlePrice}
+        goToMessage={() => setStack(HomeStack.MESSAGE)}
+      />
+    );
   } else if (stack === HomeStack.UPDATE) {
-    return <SetHandle account={account} create={false} />;
+    return (
+      <SetHandle
+        create={false}
+        handlePrice={handlePrice}
+        goToMessage={() => setStack(HomeStack.MESSAGE)}
+      />
+    );
   }
 
   return <MessagesArea account={account} />;
