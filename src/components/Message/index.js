@@ -18,7 +18,7 @@ function Message({ account, message: { from, msg } }) {
   return (
     <S.Container own={own}>
       <S.Content own={own}>
-        <S.Msg>{msg}</S.Msg>
+        <S.Msg own={own}>{msg}</S.Msg>
 
         <S.From own={own}>{handle}</S.From>
       </S.Content>

@@ -1,6 +1,9 @@
 // packages
 import styled from 'styled-components';
 
+// global
+import colors from 'global/colors';
+
 export const Container = styled.li`
   align-self: ${props => (props.own ? 'flex-end' : 'flex-start')};
 
@@ -26,7 +29,9 @@ export const Content = styled.div`
 `;
 
 export const Msg = styled.p`
-  background-color: red;
+  color: ${props => (props.own ? 'inhert' : colors.ghostWhite)};
+  background-color: ${props =>
+    props.own ? colors.antiqueWhite : colors.mediumPurple};
 
   padding: 0.5rem 1rem;
   margin-bottom: 0.15rem;

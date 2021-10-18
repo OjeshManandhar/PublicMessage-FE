@@ -1,6 +1,9 @@
 // packages
 import styled from 'styled-components';
 
+// global
+import colors from 'global/colors';
+
 export const Container = styled.div`
   width: 100%;
   height: 100vh;
@@ -34,13 +37,17 @@ export const MessageWrapper = styled.ul`
 `;
 
 export const LoadMore = styled.li`
+  font-size: 0.8rem;
+
   align-self: center;
 
   margin-bottom: 1rem;
-  padding: 0.1rem 0.5rem;
+  padding: 0.15rem 0.6rem;
+
+  color: ${colors.maxBluePurple};
 
   border-radius: 0.5rem;
-  border: 0.1rem solid red;
+  border: 0.1rem solid ${colors.maxBluePurple};
 
   cursor: pointer;
 `;
@@ -79,7 +86,7 @@ export const InputArea = styled.div`
 
   padding: 0.5rem;
 
-  border-top: 2px solid black;
+  border-top: 0.125rem solid ${colors.eerieBlack};
 `;
 
 export const Input = styled.input`
@@ -90,10 +97,11 @@ export const Input = styled.input`
   padding: 0.5rem 1rem;
 
   border-radius: 0.5rem;
-  border: 0.1rem solid black;
+  border: 0.1rem solid ${colors.eerieBlack};
 
   outline: none;
   background: none;
+  background-color: ${colors.antiqueWhite};
 
   cursor: text;
 `;
@@ -106,10 +114,11 @@ export const SendBtn = styled.button`
   margin-left: 1rem;
 
   border-radius: 0.5rem;
-  border: 0.1rem solid black;
+  border: 0.1rem solid ${colors.eerieBlack};
 
   outline: none;
   background: none;
+  background-color: ${colors.antiqueWhite};
 
   cursor: pointer;
 `;
