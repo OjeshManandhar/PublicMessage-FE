@@ -20,6 +20,14 @@ class Handle {
 
     return handle;
   }
+
+  updateHandle(handle, address) {
+    const found = this.handles.find(h => h.address === address);
+
+    if (found) {
+      found.handle = handle;
+    }
+  }
 }
 
 export default new Handle();

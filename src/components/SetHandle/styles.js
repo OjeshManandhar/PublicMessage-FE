@@ -68,9 +68,8 @@ export const Input = styled.input`
 export const SetBtn = styled.button`
   font-size: 1rem;
 
+  margin-top: 1rem;
   padding: 0.5rem 1rem;
-
-  margin-left: 1rem;
 
   border-radius: 0.5rem;
   border: 0.1rem solid ${colors.eerieBlack};
@@ -80,4 +79,10 @@ export const SetBtn = styled.button`
   background-color: ${colors.antiqueWhite};
 
   cursor: pointer;
+`;
+
+export const CancleBtn = styled(SetBtn)`
+  margin-top: 0.5rem;
+
+  background-color: ${colors.ghostWhite};
 `;

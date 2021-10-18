@@ -89,6 +89,23 @@ export const InputArea = styled.div`
   border-top: 0.125rem solid ${colors.eerieBlack};
 `;
 
+export const Btn = styled.button`
+  font-size: 1rem;
+
+  padding: 0.5rem 1rem;
+
+  margin-right: 1rem;
+
+  border-radius: 0.5rem;
+  border: 0.1rem solid ${colors.eerieBlack};
+
+  outline: none;
+  background: none;
+  background-color: ${colors.antiqueWhite};
+
+  cursor: pointer;
+`;
+
 export const Input = styled.input`
   flex-grow: 1;
 
@@ -106,19 +123,7 @@ export const Input = styled.input`
   cursor: text;
 `;
 
-export const SendBtn = styled.button`
-  font-size: 1rem;
-
-  padding: 0.5rem 1rem;
-
+export const SendBtn = styled(Btn)`
+  margin-right: 0;
   margin-left: 1rem;
-
-  border-radius: 0.5rem;
-  border: 0.1rem solid ${colors.eerieBlack};
-
-  outline: none;
-  background: none;
-  background-color: ${colors.antiqueWhite};
-
-  cursor: pointer;
 `;

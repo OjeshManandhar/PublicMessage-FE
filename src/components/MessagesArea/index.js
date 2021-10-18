@@ -11,7 +11,7 @@ import * as S from './styles';
 
 const COUNT = 5;
 
-function MessagesArea({ account }) {
+function MessagesArea({ account, updateHandle }) {
   const chatRef = useRef();
 
   const toastTimeout = useRef();
@@ -133,6 +133,7 @@ function MessagesArea({ account }) {
       <S.Toast show={Boolean(toast)}>{toast}</S.Toast>
 
       <S.InputArea>
+        <S.Btn onClick={() => updateHandle()}>Update Handle</S.Btn>
         <S.Input value={message} onChange={e => setMessage(e.target.value)} />
         <S.SendBtn onClick={sendMsg}>Send</S.SendBtn>
       </S.InputArea>

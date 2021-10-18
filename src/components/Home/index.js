@@ -29,11 +29,12 @@ function Home({ account }) {
   }, []);
 
   if (stack === HomeStack.LOADING) {
-    return <FullScreenCenter>Loading Home</FullScreenCenter>;
+    return <FullScreenCenter>Loading</FullScreenCenter>;
   } else if (stack === HomeStack.CREATE) {
     return (
       <SetHandle
         create={true}
+        account={account}
         handlePrice={handlePrice}
         goToMessage={() => setStack(HomeStack.MESSAGE)}
       />
@@ -42,13 +43,19 @@ function Home({ account }) {
     return (
       <SetHandle
         create={false}
+        account={account}
         handlePrice={handlePrice}
         goToMessage={() => setStack(HomeStack.MESSAGE)}
       />
     );
   }
 
-  return <MessagesArea account={account} />;
+  return (
+    <MessagesArea
+      account={account}
+      updateHandle={() => setStack(HomeStack.UPDATE)}
+    />
+  );
 }
 
 export default Home;
