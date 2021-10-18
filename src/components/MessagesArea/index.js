@@ -21,10 +21,16 @@ function MessagesArea({ account, updateHandle }) {
   const [message, setMessage] = useState('');
   const [noMoreMsg, setNoMoreMsg] = useState(false);
 
-  const sendMsg = useCallback(() => {
-    publicMessage.sendMessage(message);
-
-    setMessage('');
+  const sendMsg = useCallback(async () => {
+    try {
+      setToast('Sending your message');
+      await publicMessage.sendMessage(message);
+    } catch (err) {
+      console.log('error in sendMsg:', err);
+    } finally {
+      setToast('');
+      setMessage('');
+    }
   }, [message]);
 
   const fetchMessages = useCallback(
@@ -106,6 +112,7 @@ function MessagesArea({ account, updateHandle }) {
     };
   }, [fetchMessages, handleMsgToast, handleNewMessage]);
 
+  // For toast
   useEffect(() => {
     if (toast) {
       if (toastTimeout.current) {
