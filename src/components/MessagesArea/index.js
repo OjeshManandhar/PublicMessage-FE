@@ -4,6 +4,7 @@ import React, { useRef, useState, useEffect, useCallback } from 'react';
 import Message from 'components/Message';
 
 // utils
+import handles from 'utils/Handles';
 import publicMessage from 'utils/PublicMessages';
 
 // styles
@@ -18,6 +19,7 @@ function MessagesArea({ account, updateHandle }) {
 
   const [chat, setChat] = useState([]);
   const [toast, setToast] = useState('');
+  const [handle, setHandle] = useState('');
   const [message, setMessage] = useState('');
   const [noMoreMsg, setNoMoreMsg] = useState(false);
 
@@ -103,6 +105,8 @@ function MessagesArea({ account, updateHandle }) {
   useEffect(() => {
     fetchMessages();
 
+    handles.getHandle(account).then(handle => setHandle(handle));
+
     publicMessage.addEventListener('MessageSaved', handleNewMessage);
     publicMessage.addEventListener('SendingMessage', handleMsgToast);
 
@@ -110,7 +114,7 @@ function MessagesArea({ account, updateHandle }) {
       publicMessage.removeEventListener('MessageSaved', handleNewMessage);
       publicMessage.removeEventListener('SendingMessage', handleMsgToast);
     };
-  }, [fetchMessages, handleMsgToast, handleNewMessage]);
+  }, [account, fetchMessages, handleMsgToast, handleNewMessage]);
 
   // For toast
   useEffect(() => {
@@ -141,7 +145,11 @@ function MessagesArea({ account, updateHandle }) {
 
       <S.InputArea>
         <S.Btn onClick={() => updateHandle()}>Update Handle</S.Btn>
-        <S.Input value={message} onChange={e => setMessage(e.target.value)} />
+        <S.Input
+          value={message}
+          onChange={e => setMessage(e.target.value)}
+          placeholder={`Send a message as ${handle}`}
+        />
         <S.SendBtn onClick={sendMsg}>Send</S.SendBtn>
       </S.InputArea>
     </S.Container>
