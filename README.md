@@ -1,3 +1,14 @@
+# PublicMessage-FE
+ReactJS app to communicate with [PublicMessage-Contract](https://github.com/OjeshManandhar/PublicMessage-Contract)
+
+## To run
+- Make sure development network is running
+- `yarn` to install dependencies
+- `yarn start` to start the web server
+- In case you update the contract, re-compile and/or redeploy/migrate, copy the newly generated ABIs [here](https://github.com/OjeshManandhar/PublicMessage-FE/tree/master/src/contract_abis)
+
+---
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
